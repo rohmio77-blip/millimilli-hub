@@ -1,0 +1,237 @@
+<title>Millimilli Store Select</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@500;600;700&display=swap');
+
+  :root{
+    --bg: #ffffff;
+    --ink: #0d0d0d;
+    --ink-70: rgba(13,13,13,0.68);
+    --ink-45: rgba(13,13,13,0.45);
+    --line: rgba(13,13,13,0.14);
+    --line-strong: rgba(13,13,13,0.28);
+    --accent: #39ff14;
+    --accent-ink: #111111;
+    --muted: rgba(13,13,13,0.07);
+    --card-bg: #ffffff;
+    --shadow: 0 18px 40px -24px rgba(13,13,13,0.35);
+    --logo-filter: none;
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --bg: #0a0a0a;
+      --ink: #f6f6f4;
+      --ink-70: rgba(246,246,244,0.72);
+      --ink-45: rgba(246,246,244,0.48);
+      --line: rgba(246,246,244,0.16);
+      --line-strong: rgba(246,246,244,0.32);
+      --accent: #39ff14;
+      --accent-ink: #111111;
+      --muted: rgba(246,246,244,0.1);
+      --card-bg: #151515;
+      --shadow: 0 18px 40px -24px rgba(0,0,0,0.6);
+      --logo-filter: invert(1);
+    }
+  }
+  :root[data-theme="dark"]{
+    --bg: #0a0a0a;
+    --ink: #f6f6f4;
+    --ink-70: rgba(246,246,244,0.72);
+    --ink-45: rgba(246,246,244,0.48);
+    --line: rgba(246,246,244,0.16);
+    --line-strong: rgba(246,246,244,0.32);
+    --accent: #39ff14;
+    --accent-ink: #111111;
+    --muted: rgba(246,246,244,0.1);
+    --card-bg: #151515;
+    --shadow: 0 18px 40px -24px rgba(0,0,0,0.6);
+    --logo-filter: invert(1);
+  }
+
+  *{ box-sizing: border-box; }
+  body{
+    background: var(--bg);
+    color: var(--ink);
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    min-height: 100%;
+  }
+  .mono{ font-family:'JetBrains Mono', ui-monospace, monospace; }
+
+  .page{
+    max-width: 1080px;
+    margin: 0 auto;
+    padding: 20px 20px 32px;
+    min-height: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 22px;
+  }
+
+  /* header */
+  .top{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+  }
+  .logo-mark{
+    height: 22px;
+    width: auto;
+    display: block;
+    filter: var(--logo-filter);
+  }
+  .top-tag{
+    font-size: 10.5px;
+    letter-spacing: 0.14em;
+    color: var(--ink-45);
+    text-transform: uppercase;
+    white-space: nowrap;
+  }
+
+  /* hero */
+  .hero{
+    text-align: center;
+    position: relative;
+    padding: 14px 0 4px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+  }
+  .hero-globe{
+    position: absolute;
+    top: 50%; left: 50%;
+    width: min(520px, 150%);
+    height: min(520px, 150%);
+    transform: translate(-50%,-50%);
+    z-index: 0;
+    opacity: 0.35;
+    pointer-events: none;
+  }
+  h1{
+    position: relative; z-index: 1;
+    margin: 0;
+    font-weight: 800;
+    font-size: clamp(26px, 4.8vw, 38px);
+    line-height: 1.2;
+    letter-spacing: -0.01em;
+    text-wrap: balance;
+    max-width: 16ch;
+  }
+  .sub{
+    position: relative; z-index: 1;
+    margin: 0;
+    font-size: clamp(14px, 2vw, 16px);
+    color: var(--ink-70);
+    max-width: 38ch;
+  }
+
+  /* cards */
+  .cards{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 18px;
+  }
+  .card{
+    background: var(--card-bg);
+    border: 1px solid var(--line);
+    border-radius: 20px;
+    padding: 24px 22px 22px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    text-decoration: none;
+    color: var(--ink);
+    transition: transform .18s ease, border-color .18s ease, box-shadow .18s ease;
+  }
+  .card:hover, .card:focus-visible{
+    transform: translateY(-3px);
+    border-color: var(--line-strong);
+    box-shadow: var(--shadow);
+    outline: none;
+  }
+  .card:focus-visible{ outline: 2px solid var(--accent); outline-offset: 3px; }
+  .card-label{
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    color: var(--ink-45);
+    text-transform: uppercase;
+  }
+  .card h2{
+    margin: 0;
+    font-size: 24px;
+    font-weight: 800;
+    letter-spacing: -0.01em;
+  }
+  .cta{
+    margin-top: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    font-size: 15px;
+    font-weight: 700;
+    background: var(--muted);
+    color: var(--ink);
+    border-radius: 999px;
+    padding: 15px 18px;
+    transition: background .18s ease, color .18s ease;
+  }
+  .card:hover .cta, .card:focus-visible .cta{
+    background: var(--accent);
+    color: var(--accent-ink);
+  }
+
+  @media (max-width: 640px){
+    .cards{ grid-template-columns: 1fr; }
+    .top-tag{ display: none; }
+    .page{ gap: 18px; padding-top: 16px; }
+    .hero{ padding: 6px 0 2px; gap: 8px; }
+  }
+
+  .foot{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    color: var(--ink-45);
+    text-transform: uppercase;
+  }
+</style>
+
+<div class="page">
+  <header class="top">
+    <img class="logo-mark" src="logo.png" alt="milli squared">
+    <span class="top-tag mono">OFFICIAL STORE</span>
+  </header>
+
+  <main class="hero">
+    <svg class="hero-globe" viewBox="0 0 400 400" aria-hidden="true">
+      <circle cx="200" cy="200" r="150" fill="none" stroke="var(--line)" stroke-width="1"/>
+      <ellipse cx="200" cy="200" rx="60" ry="150" fill="none" stroke="var(--line)" stroke-width="1"/>
+      <ellipse cx="200" cy="200" rx="110" ry="150" fill="none" stroke="var(--line)" stroke-width="1"/>
+      <line x1="50" y1="200" x2="350" y2="200" stroke="var(--line)" stroke-width="1"/>
+      <line x1="60" y1="140" x2="340" y2="140" stroke="var(--line)" stroke-width="1" opacity="0.6"/>
+      <line x1="60" y1="260" x2="340" y2="260" stroke="var(--line)" stroke-width="1" opacity="0.6"/>
+    </svg>
+    <h1>Choose Your Store</h1>
+    <p class="sub">공식 스토어를 선택해 주세요</p>
+  </main>
+
+  <section class="cards">
+    <a class="card" href="https://millimilli.kr/?utm_source=qr_hub&utm_medium=hub_page&utm_campaign=store_select" target="_blank" rel="noopener">
+      <span class="card-label mono">KR / KOREA</span>
+      <h2>국내 공식몰</h2>
+      <span class="cta">국내몰 바로가기 ↗</span>
+    </a>
+    <a class="card" href="https://www.amazon.com/stores/millimilli/page/6A2DFDC0-22A8-445A-87FD-E5DAFB37AB10?lp_asin=B0GYCB5164&ref_=ast_bln&store_ref=bl_ast_dp_brandlogo_sto&utm_source=qr_hub&utm_medium=hub_page&utm_campaign=store_select" target="_blank" rel="noopener">
+      <span class="card-label mono">US / NORTH AMERICA</span>
+      <h2>Amazon US</h2>
+      <span class="cta">Shop on Amazon ↗</span>
+    </a>
+  </section>
+
+  <footer class="foot mono">
+    <span>© MILLIMILLI</span>
+  </footer>
+</div>
